@@ -163,4 +163,28 @@ fn main() {
 
     let field = MirrorField::load_from_file(&path);
     println!("Power going east from 0, 0: {}", field.get_power(&[Beam {direction: Direction::East, position: (0, 0)}]));
+
+    let max_power_from_west: usize = (0..field.matrix.len())
+        .map(|y| field.get_power(&[Beam {direction: Direction::East, position: (0, y)}]))
+        .max()
+        .unwrap();
+    println!("Max power from western border: {}", max_power_from_west);
+
+    let max_power_from_east: usize = (0..field.matrix.len())
+        .map(|y| field.get_power(&[Beam {direction: Direction::West, position: (field.matrix[0].len() - 1, y)}]))
+        .max()
+        .unwrap();
+    println!("Max power from eastern border: {}", max_power_from_east);
+
+    let max_power_from_north: usize = (0..field.matrix[0].len())
+        .map(|x| field.get_power(&[Beam {direction: Direction::South, position: (x, 0)}]))
+        .max()
+        .unwrap();
+    println!("Max power from northern border: {}", max_power_from_north);
+
+    let max_power_from_south: usize = (0..field.matrix.len())
+        .map(|x| field.get_power(&[Beam {direction: Direction::North, position: (x, field.matrix.len() - 1)}]))
+        .max()
+        .unwrap();
+    println!("Max power from eastern border: {}", max_power_from_south);
 }
