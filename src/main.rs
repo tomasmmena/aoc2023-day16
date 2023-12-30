@@ -186,5 +186,5 @@ fn main() {
         .map(|x| field.get_power(&[Beam {direction: Direction::North, position: (x, field.matrix.len() - 1)}]))
         .max()
         .unwrap();
-    println!("Max power from eastern border: {}", max_power_from_south);
+    println!("Max power from southern border: {}", max_power_from_south);
 }
